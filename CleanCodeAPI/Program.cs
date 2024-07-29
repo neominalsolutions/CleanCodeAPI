@@ -5,6 +5,7 @@ using Autofac.Extensions.DependencyInjection;
 using CleanCodeAPI;
 using CleanCodeAPI.Attributes;
 using CleanCodeAPI.Middlewares;
+using CleanCodeAPI.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -18,20 +19,25 @@ builder.Services.AddSwaggerGen();
 
 // Service Filter olarak tanýmlanan atributeler uygulama içerisinde Scoped olarak Web Request bazlý otomatik instance alýnacak þekilde tanýmlanmalýdýr.
 builder.Services.AddScoped<PerformanceBenchMarkAttribute>();
-
 // builder.Services.AddScoped<IRepo<Product>>();
+
+
 
 // Not Middlewarelere her bir istekte yep yeni bir instance almasý gerektiðinden transient olarak tanýmlanýr.
 builder.Services.AddTransient<ErrorHandlingMiddleware>();
 
 // AutoFac ile Net Core Dependecy Injection Registeration kodu
 
+
+// Service Injection
+builder.Services.AddScoped<ScopeInstanceService>();
+builder.Services.AddTransient<TransientInstanceService>();
+builder.Services.AddSingleton<SingletonInstanceService>();
+
 builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory()).ConfigureContainer<ContainerBuilder>(builder =>
 {
   builder.RegisterModule(new AopBussinessLayerModule());
 });
-
-
 
 var app = builder.Build();
 
