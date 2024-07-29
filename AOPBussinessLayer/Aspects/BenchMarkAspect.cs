@@ -9,22 +9,12 @@ using System.Threading.Tasks;
 
 namespace AOPBussinessLayer.Aspects
 {
-  //[AttributeUsage(AttributeTargets.Method, Inherited = true)]
-  //public class BenchMarkAttribute: Attribute{
-
-  //  public BenchMarkAttribute()
-  //  {
-
-  //  }
-  
-  //}
-  public class BenchMarkAttribute : Attribute,IInterceptor
+  [AttributeUsage(AttributeTargets.Method, Inherited = true)]
+  public class BenchMarkAttribute : Attribute
+  {}
+  public class BenchMarkAspect : IInterceptor
   {
 
-    public BenchMarkAttribute()
-    {
-
-    }
 
     public void Intercept(IInvocation invocation)
     {

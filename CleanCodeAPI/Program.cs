@@ -26,20 +26,17 @@ builder.Services.AddScoped<PerformanceBenchMarkAttribute>();
 // Not Middlewarelere her bir istekte yep yeni bir instance almasý gerektiðinden transient olarak tanýmlanýr.
 builder.Services.AddTransient<ErrorHandlingMiddleware>();
 
-// AutoFac ile Net Core Dependecy Injection Registeration kodu
-builder.Services.AddScoped<ISample, ASampleService>();
-
 // Service Injection
 builder.Services.AddScoped<ScopeInstanceService>();
 builder.Services.AddTransient<TransientInstanceService>();
 builder.Services.AddSingleton<SingletonInstanceService>();
 
+// AutoFac Module Registeration
 
-
-//builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory()).ConfigureContainer<ContainerBuilder>(builder =>
-//{
-//  builder.RegisterModule(new AopBussinessLayerModule());
-//});
+builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory()).ConfigureContainer<ContainerBuilder>(builder =>
+{
+  builder.RegisterModule(new AopBussinessLayerModule());
+});
 
 var app = builder.Build();
 

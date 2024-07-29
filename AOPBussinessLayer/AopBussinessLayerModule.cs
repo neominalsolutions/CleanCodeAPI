@@ -15,17 +15,14 @@ namespace AOPBussinessLayer
     // uygulamaya dahil edeceğimiz herşeyi Load methodunda register ediyoruz
     protected override void Load(ContainerBuilder builder)
     {
-      //builder.RegisterType<SampleService>().As<ISample>();
-      //builder.RegisterType<ASampleService>().As<ISample>();
-      builder.RegisterType<ASampleService>();
-      builder.RegisterType<BenchMarkAttribute>().As<IInterceptor>();
-      
 
+      builder.RegisterType<BenchMarkAspect>();
 
-      builder.RegisterType<SampleService>().AsImplementedInterfaces().EnableInterfaceInterceptors().InterceptedBy(typeof(BenchMarkAttribute)).SingleInstance();
+      // AsImplementedInterfaces() olarak servisin sonuna eklemeyi unuttuğumuzdan sınıfı register edememiş.
 
-      //var assembly = Assembly.GetExecutingAssembly();
-      //builder.RegisterAssemblyTypes(assembly).AsImplementedInterfaces().EnableInterfaceInterceptors().InterceptedBy(typeof(BenchMarkAspect)).SingleInstance();
+      builder.RegisterType<SampleService>().AsImplementedInterfaces().EnableInterfaceInterceptors().InterceptedBy(typeof(BenchMarkAspect));
+
+    
     }
   }
 }

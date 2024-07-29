@@ -10,7 +10,7 @@ namespace AOPBussinessLayer.Services
 
   public class SampleService:ISample
   {
-    //[BenchMark]
+    [BenchMark]
     public void Execute()
     {
 
