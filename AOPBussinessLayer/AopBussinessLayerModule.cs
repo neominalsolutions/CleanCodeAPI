@@ -15,7 +15,9 @@ namespace AOPBussinessLayer
     // uygulamaya dahil edeceğimiz herşeyi Load methodunda register ediyoruz
     protected override void Load(ContainerBuilder builder)
     {
-      builder.RegisterType<SampleService>();
+      //builder.RegisterType<SampleService>().As<ISample>();
+      //builder.RegisterType<ASampleService>().As<ISample>();
+      builder.RegisterType<ASampleService>();
       builder.RegisterType<BenchMarkAttribute>().As<IInterceptor>();
       
 

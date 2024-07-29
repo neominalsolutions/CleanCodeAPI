@@ -8,9 +8,9 @@ namespace CleanCodeAPI.Controllers
   [ApiController]
   public class AutoFacAopController : ControllerBase
   {
-    private readonly SampleService sampleService;
+    private readonly ISample sampleService;
 
-    public AutoFacAopController(SampleService sampleService)
+    public AutoFacAopController(ISample sampleService)
     {
       this.sampleService = sampleService;
     }
